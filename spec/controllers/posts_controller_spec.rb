@@ -2,52 +2,21 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
-  describe "GET #index" do
-    it "returns http success" do
+  describe 'Get #index' do
+    before do
       get :index
-      expect(response).to have_http_status(:success)
+    end
+    it 'リクエストは200 OKとなること' do
+      expect(response.status).to eq 200
     end
   end
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #new" do
-    it "returns http success" do
+  describe 'Get #new' do
+    before do
       get :new
-      expect(response).to have_http_status(:success)
     end
-  end
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns http success" do
-      get :edit
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+    it 'リクエストは200 OKとなること' do
+      expect(response.status).to eq 200
     end
   end
 
