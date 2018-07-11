@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180711104107) do
+ActiveRecord::Schema.define(version: 20180711113845) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,6 +48,27 @@ ActiveRecord::Schema.define(version: 20180711104107) do
     t.index ["content"], name: "index_posts_on_content"
     t.index ["sake_id"], name: "index_posts_on_sake_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "sakes", force: :cascade do |t|
+    t.integer "brewery_id", null: false
+    t.string "brand", null: false
+    t.string "specially_designated"
+    t.string "recipe"
+    t.string "flavor"
+    t.float "nihonshudo"
+    t.float "acidity"
+    t.boolean "is_confirmed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["acidity"], name: "index_sakes_on_acidity"
+    t.index ["brand"], name: "index_sakes_on_brand"
+    t.index ["brewery_id"], name: "index_sakes_on_brewery_id"
+    t.index ["flavor"], name: "index_sakes_on_flavor"
+    t.index ["is_confirmed"], name: "index_sakes_on_is_confirmed"
+    t.index ["nihonshudo"], name: "index_sakes_on_nihonshudo"
+    t.index ["recipe"], name: "index_sakes_on_recipe"
+    t.index ["specially_designated"], name: "index_sakes_on_specially_designated"
   end
 
   create_table "users", force: :cascade do |t|
