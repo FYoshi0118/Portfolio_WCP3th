@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180711064038) do
     t.string "family_name", null: false
     t.string "given_name", null: false
     t.boolean "is_main_administer", default: false, null: false
-    t.boolean "is_deleted", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
