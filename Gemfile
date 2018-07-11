@@ -29,6 +29,11 @@ group :development, :test do
   # Hirb
   gem 'hirb'
   gem 'hirb-unicode'
+  # デバッグ
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :development do
