@@ -34,6 +34,12 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  # テスト
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :development do
