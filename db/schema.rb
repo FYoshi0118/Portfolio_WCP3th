@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180711113845) do
+ActiveRecord::Schema.define(version: 20180711115939) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(version: 20180711113845) do
     t.index ["is_deleted"], name: "index_admins_on_is_deleted"
     t.index ["is_main_administer"], name: "index_admins_on_is_main_administer"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "breweries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "name_kana", null: false
+    t.string "post_code", limit: 7, null: false
+    t.string "address", null: false
+    t.string "phone_number", limit: 11
+    t.string "email"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address"], name: "index_breweries_on_address"
+    t.index ["name"], name: "index_breweries_on_name"
+    t.index ["name_kana"], name: "index_breweries_on_name_kana"
+    t.index ["phone_number"], name: "index_breweries_on_phone_number"
   end
 
   create_table "posts", force: :cascade do |t|
