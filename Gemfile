@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   # テスト
   gem 'rspec-rails'
+  gem "factory_bot_rails"
 end
 
 group :test do
