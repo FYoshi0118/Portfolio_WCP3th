@@ -1,17 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Brewery, type: :model do
-  describe '正常系のテスト' do
+  describe 'normal system test' do
     it 'has a valid factory' do
       expect(FactoryBot.build(:brewery)).to be_valid
     end
 
     it 'has a valid factory(add to phone_number, email, url)' do
-      expect(FactoryBot.build(:brewery, phone_number: '0729550018', email: 'email@nazo.com', url: 'http://www.fujimotosyuzou.com/index.html')).to be_valid
+      expect(FactoryBot.build(
+        :brewery, phone_number: '0729550018',
+                  email: 'email@nazo.com',
+                  url: 'http://www.fujimotosyuzou.com/index.html'
+        )).to be_valid
     end
   end
 
-  describe '異常系のテスト' do
+  describe 'error system test' do
     context 'when the value is empty' do
       it 'is invalid without a name' do
         brewery = FactoryBot.build(:brewery, name: nil)
