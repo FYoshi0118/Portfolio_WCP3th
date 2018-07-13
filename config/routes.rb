@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admins/show'
+
   get 'users/show'
 
   devise_for :users, controllers: {
