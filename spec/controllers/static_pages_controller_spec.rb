@@ -2,15 +2,32 @@ require 'rails_helper'
 
 RSpec.describe StaticPagesController, type: :controller do
 
-  describe "ルーティング確認" do
-    it "static_pages#top succsess" do
+  describe '#top' do
+    before do 
       get :top
-      expect(response).to have_http_status(:success)
     end
     
-    it "static_pages#about succsess" do
+    it 'responds successfully' do
+      expect(response).to be_success
+    end
+    
+    it 'returns a 200 response' do
+      expect(response).to have_http_status '200'
+    end
+  end
+
+  describe '#about' do
+    before do
       get :about
-      expect(response).to have_http_status(:success)
+    end
+    
+    it "responds successfully" do
+      get :about
+      expect(response).to be_success
+    end
+    
+    it 'returns a 200 response' do
+      expect(response).to have_http_status '200'
     end
   end
 
