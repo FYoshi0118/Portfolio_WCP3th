@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admins do
+    get 'breweries/index'
+  end
+
   get 'admins/show'
 
   get 'users/show'
