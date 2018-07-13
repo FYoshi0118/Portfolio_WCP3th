@@ -35,8 +35,7 @@ RSpec.describe PostsController, type: :controller do
     context "as an authorized user"do
       before do
         @user = FactoryBot.create(:user)
-        sake = FactoryBot.create(:sake)
-        @post = FactoryBot.create(:post, user: @user, sake: sake)
+        @post = FactoryBot.create(:post, user: @user)
       end
 
       it "respond successfully" do
@@ -50,8 +49,7 @@ RSpec.describe PostsController, type: :controller do
       before do
         @user = FactoryBot.create(:user)
         other_user = FactoryBot.create(:user)
-        sake = FactoryBot.create(:sake)
-        @post = FactoryBot.create(:post, user: other_user, sake: sake)
+        @post = FactoryBot.create(:post, user: other_user)
       end
 
       it "redirect to the top page" do
@@ -66,12 +64,12 @@ RSpec.describe PostsController, type: :controller do
     context "as an authenticated user" do
       before do
         @user = FactoryBot.create(:user)
-        @sake = FactoryBot.create(:sake)
       end
 
       it "add a post" do
+        post_params = FactoryBot.attributes_for(:post)
+        binding.pry
         sign_in @user
-        post_params = FactoryBot.attributes_for(:post, user_id: @user.id, sake_id: @sake.id)
         expect {
           post :create, params: { post: post_params }
         }.to change(@user.posts, :count).by(1)
