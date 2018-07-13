@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :post do
-    
+    content "この内容はテスト"
+
     association :user
-    # association :sake
+    association :sake
   end
 end

@@ -1,83 +1,54 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  before do
-    User.create(
-      name_code:  '@tarou',
-      nickname:   'テスト太郎',
-      email:      'tarou@wcp.com',
-      password:   'password'
-    )
-    # Sake.create(
-    #   brewery_id: 1,
-    #   brand: '獺祭',
-    #   specially_designated: '純米酒',
-    #   recipe: "無濾過生原酒",
-    #   flavor: "薫酒",
-    #   nihonshudo: -2,
-    #   acidity: -2
-    # )
-  end
-
-  describe '正常系のテスト'do
-    it 'user_id、sake_id、star、contentがあれば有効な状態であること' do
-      post = Post.new(
-        user_id: 1,
-        sake_id: 1,
-        content: 'この内容はテスト'
-      )
-      expect(post).to be_valid
+  describe "normal system teset"do
+    it "has a valid factory" do
+      expect(FactoryBot.build(:post)).to be_valid
     end
     
-    it 'user_id、sake_id、star、content、imageがあれば有効な状態であること' do
-      post = Post.new(
-        user_id: 1,
-        sake_id: 1,
-        content: 'この内容はテスト',
-        image_id: 1234
-      )
+    it "has a valid factory( + image_id )" do
+      post = FactoryBot.build(:post, image_id: "1234")
       expect(post).to be_valid
     end
 
-    it 'starがデフォルトで0であること' do
-      post = Post.new()
+    it "the default for star is 0" do
+      post = FactoryBot.build(:post)
       expect(post.star).to eq 0
     end
   end
 
-  describe '異常系のテスト' do
-    context '値が空の場合' do
-      it 'user_idがなければ無効な状態であること' do
-        post = Post.new(user_id: nil)
+  describe "error system test" do
+    context "when the value is empty" do
+      it "is invalid without user_id" do
+        post = FactoryBot.build(:post, user_id: nil)
         post.valid?
         expect(post.errors[:user_id]).to include("can't be blank")
       end
   
-      it 'sake_idがなければ無効な状態であること' do
-        post = Post.new(sake_id: nil)
+      it "is invalid without sake_id" do
+        post = FactoryBot.build(:post, sake_id: nil)
         post.valid?
         expect(post.errors[:sake_id]).to include("can't be blank")
       end
   
-      it 'contentがなければ無効な状態であること' do
-        post = Post.new(content: nil)
+      it "is invalid without content" do
+        post = FactoryBot.build(:post, content: nil)
         post.valid?
         expect(post.errors[:content]).to include("can't be blank")
       end
   
-      it 'starがなければ無効な状態であること' do
-        post = Post.new(star: nil)
+      it "is invalid without star" do
+        post = FactoryBot.build(:post, star: nil)
         post.valid?
         expect(post.errors[:star]).to include("can't be blank")
       end
     end
 
-    context '入力制限の場合' do
-      it 'contentが201文字以上であれば無効な状態であること' do
-        str = "これは１０文字でーす" * 21
-        post = Post.new(content: str)
+    context "when the value is limited" do
+      it "is invalid with 201 or more characters" do
+        post = FactoryBot.build(:post, content: Faker::Number.number(201))
         post.valid?
-        expect(post.errors[:content]).to include('is too long (maximum is 200 characters)')
+        expect(post.errors[:content]).to include("is too long (maximum is 200 characters)")
       end
     end
   end

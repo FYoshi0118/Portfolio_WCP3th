@@ -1,5 +1,6 @@
 class Brewery < ApplicationRecord
   has_many :sakes
+  # accepts_nested_attributes_for :sakes
 
   validates :name, presence: true
   validates :name_kana, presence: true
