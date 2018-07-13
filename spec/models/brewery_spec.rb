@@ -41,6 +41,14 @@ RSpec.describe Brewery, type: :model do
         expect(brewery.errors[:address]).to include("can't be blank")
       end
     end
+    
+    context 'when the value is limited' do
+      it 'is invalid with - in the postalcode' do
+        brewery = FactoryBot.build(:brewery, post_code: '123-4567')
+        brewery.valid?
+        expect(brewery.errors[:post_code]).to include('半角数字7桁で入力して下さい。例：1234567')
+      end
+    end
   end
 
 end
