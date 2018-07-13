@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :post_owner?, except: [:index, :new, :create]
+
   def index
   end
 
@@ -19,4 +22,11 @@ class PostsController < ApplicationController
 
   def destroy
   end
+
+  private
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
 end
