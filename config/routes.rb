@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :admins do
+    get 'posts/index'
+  end
+
+  namespace :admins do
     get 'sakes/index'
   end
 
