@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+  namespace :admins do
+    get 'posts/index'
+  end
+
+  namespace :admins do
+    get 'sakes/index'
+  end
+
+  namespace :admins do
+    get 'users/index'
+  end
+
+  namespace :admins do
+    get 'breweries/index'
+  end
+
+  get 'admins/show'
+
+  get 'users/show'
+
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     passwords:     'users/passwords',
