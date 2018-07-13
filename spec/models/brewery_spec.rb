@@ -8,9 +8,9 @@ RSpec.describe Brewery, type: :model do
 
     it 'has a valid factory(add to phone_number, email, url)' do
       expect(FactoryBot.build(
-        :brewery, phone_number: '0729550018',
-                  email: 'email@nazo.com',
-                  url: 'http://www.fujimotosyuzou.com/index.html'
+        :brewery, phone_number: Faker::Number.number(10),
+                  email: Faker::Internet.email,
+                  url: Faker::Internet.url
         )).to be_valid
     end
   end
@@ -45,6 +45,18 @@ RSpec.describe Brewery, type: :model do
     context 'when the value is limited' do
       it 'is invalid with - in the postalcode' do
         brewery = FactoryBot.build(:brewery, post_code: '123-4567')
+        brewery.valid?
+        expect(brewery.errors[:post_code]).to include('半角数字7桁で入力して下さい。例：1234567')
+      end
+      
+      it 'is invalid with 8 or more characters in the postalcode' do
+        brewery = FactoryBot.build(:brewery, post_code: Faker::Number.number(8))
+        brewery.valid?
+        expect(brewery.errors[:post_code]).to include('半角数字7桁で入力して下さい。例：1234567')
+      end
+      
+      it 'is invalid with 7 or less characters in the postalcode' do
+        brewery = FactoryBot.build(:brewery, post_code: Faker::Number.number(6))
         brewery.valid?
         expect(brewery.errors[:post_code]).to include('半角数字7桁で入力して下さい。例：1234567')
       end

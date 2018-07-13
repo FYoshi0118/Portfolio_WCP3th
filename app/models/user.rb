@@ -2,8 +2,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name_code, presence: true, uniqueness: true
+  has_many :posts
 
+  validates :name_code, presence: true, uniqueness: true
   validates :nickname, presence: true
 
   # validates :birthday,
@@ -32,7 +33,4 @@ class User < ApplicationRecord
   }
 
   validates :status, presence: true
-  
-  # association
-  has_many :posts
 end
