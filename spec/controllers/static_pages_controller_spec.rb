@@ -13,6 +13,9 @@ RSpec.describe StaticPagesController, type: :controller do
     it "returns a 200 response" do
       expect(response).to have_http_status "200"
     end
+    it "renders the :top template" do
+      expect(response).to render_template :top
+    end
   end
 
   describe "#about" do
@@ -25,6 +28,9 @@ RSpec.describe StaticPagesController, type: :controller do
     end
     it "returns a 200 response" do
       expect(response).to have_http_status "200"
+    end
+    it "renders the :about template" do
+      expect(response).to render_template :about
     end
   end
 end
