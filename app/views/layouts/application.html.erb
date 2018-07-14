@@ -9,6 +9,23 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="sticky-top">
+      <% if admin_signed_in? %>
+        <%= render 'layouts/header/header_admins'  %>
+      <% else %>
+        <%= render 'layouts/header/header_users'  %>
+      <% end %>
+    </header>
+
+    <div class="main-container container-fluid">
+      <%= yield %>
+    </div>
+
+    <footer class="bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Portfolio</p>
+      </div>
+    </footer>
+
   </body>
 </html>

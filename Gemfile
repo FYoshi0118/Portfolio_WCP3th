@@ -22,8 +22,14 @@ gem 'devise'
 gem 'kaminari'
 
 # bootstrap
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+
+# font-awesome
+gem "font-awesome-rails"
+
+# seed-fu
+gem 'seed-fu'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
