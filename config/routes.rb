@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   registrations: 'admins/registrations'
   }
+  get 'admins/top' => 'admins#top', as: :admin_top
   get 'admins/index' => 'admins#index', as: :admins
   resources :admins, except: [:index, :new, :create]
   namespace :admins do

@@ -17,6 +17,14 @@
       <% end %>
     </header>
 
+    <%# deviseログイン・ログアウト時のflash%>
+    <% if notice %>
+      <p class="alert alert-success text-center"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger text-center"><%= alert %></p>
+    <% end %>
+
     <div class="main-container container-fluid">
       <%= yield %>
     </div>
