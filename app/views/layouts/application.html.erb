@@ -37,7 +37,14 @@
 
     <% if Rails.env.development?%>
       <div class="debug">
+        <%= debug(response.status) %>
+        <p>response status</p>
         <%= debug(params) %>
+        <p>params</p>
+        <%= debug(@user.inspect) %>
+        <p>@user</p>
+        <%= debug(current_user.inspect) %>
+        <p>current_user</p>
       </div>
     <% end %>
 

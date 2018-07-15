@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :post_owner?, except: [:index, :new, :create] # application_controller
+  before_action :ensure_correct_post_user?, except: [:index, :new, :create] # application_controller
 
   def index
     @posts = Post.where(user_id: current_user.id)

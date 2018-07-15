@@ -27,6 +27,14 @@ class User < ApplicationRecord
     }
 
   validates :password, presence: true,
+                       on: :create,
+    length: {
+      in: 6..20,
+      message: "6～20文字以内で入力して下さい。"
+    }
+  validates :password, presence: true,
+                       on: :update,
+                       allow_blank: true,
     length: {
       in: 6..20,
       message: "6～20文字以内で入力して下さい。"
