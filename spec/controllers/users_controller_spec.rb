@@ -86,10 +86,17 @@ RSpec.describe UsersController, type: :controller do
       it "redirect to the top page" do
         expect(response).to redirect_to root_path
       end
+    end
 
-      context "as a geust" do
-        it "returns a 302 response"
-        it "redirect to the top page"
+    context "as a geust" do
+      before do
+        get :edit, params: {id: 1}
+      end
+      it "returns a 302 response" do
+        expect(response).to have_http_status "302"
+      end
+      it "redirect to the top page" do
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
@@ -127,4 +134,61 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "#confirm" do
+    context "as an authorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        sign_in @user
+        get :confirm, params: {id: @user.id}
+      end
+
+      it "responds successfully" do
+        expect(response).to be_success
+      end
+      it "returns a 200 response" do
+        expect(response).to have_http_status "200"
+      end
+      it "renders the :show template" do
+        expect(response).to render_template :confirm
+      end
+      it "is valid correct values in @user" do
+        expect(assigns(:user)).to eq @user
+      end
+    end
+
+    context "as an unauthorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        other_user = FactoryBot.create(:user)
+        sign_in @user
+        get :confirm, params: {id: other_user.id}
+      end
+
+      it "returns a 302 response" do
+        expect(response).to have_http_status "302"
+      end
+      it "redirect to the top page" do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "as a guest" do
+      before do
+        get :confirm, params: {id: 1}
+      end
+
+      it "returns a 302 response" do
+        expect(response).to have_http_status "302"
+      end
+      it "redirect to the top page" do
+        expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+  end
+
+  describe "#unsubscribe" do
+    context "as authorized user"
+    context "as an unauthorized user"
+    context "as a guest"
+  end
 end

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, except: [:index, :new, :create]
+  get 'users/:id/confirm' => 'users#confirm', as: :confirm_user
+  post 'users/:id/confirm' => 'users#unsubscribe', as: :unsubscribe_user
   resources :posts
 
   # admin関連のルーティング

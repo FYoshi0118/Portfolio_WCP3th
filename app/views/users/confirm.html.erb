@@ -1,0 +1,60 @@
+<div class="container py-4">
+  <div class="row text-center">
+    <div class="col-12 font-weight-bold h3">
+      <p>
+        退会に関する注意事項
+      </p>
+      <p class="text-info h5">
+        ※必ずお読みください
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row text-center justify-content-center">
+    <div class="col-6">
+      <p>
+        退会する場合、下記の内容をご了承頂く必要があります。
+      </p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="list-group">
+
+        <span class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">・アカウント機能の停止</h5>
+          </div>
+          <p class="mb-1">ログインが出来なくなり、投稿した情報が出来なくなります。</p>
+        </span>
+
+        <span class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">・アカウント復旧について</h5>
+          </div>
+          <p class="mb-1">アカウント情報は当社にてしばらく保持されますが、当社の都合により削除される可能性があります。その際は復旧することが出来なくなります。</p>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-12 text-center text-white mt-4">
+      <p class="flash-message text-danger text-center">
+        <%= flash[:unsubscribe_faled] %>
+      </p>
+
+      <%= form_for(@user, :url => {:controller => :users, :action => :unsubscribe}, :method => "post") do |f| %>
+        <p>
+          <%= f.check_box :status, checked: 1, unchecked: 0 %>
+          <%= label_tag :member_status, "上記の内容を理解しました", class: "text-dark" %>
+        </p>
+
+        <%= f.submit "退会する", "data-confirm" => "本当に退会しますか？この操作は取り消せません。", class: "btn btn-danger" %>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div><!-- 全体containerの閉じタグ -->
