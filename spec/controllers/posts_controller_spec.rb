@@ -15,9 +15,6 @@ RSpec.describe PostsController, type: :controller do
       it "returns a 200 response" do
         expect(response).to have_http_status "200"
       end
-      it "renders the :top template" do
-        expect(response).to render_template :show
-      end
     end
 
     context "as a guest" do

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_correct_post_user?
     unless @post.user == current_user
-    redirect_to root_path, alert: "アクセス権限がありません。"
+      redirect_to root_path, alert: "アクセス権限がありません。"
     end
   end
 
