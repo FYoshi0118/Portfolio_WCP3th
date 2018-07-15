@@ -28,6 +28,7 @@
           <li class="list-group-item">
             <p class="small text-secondary">自己紹介</p>
             <%= @user.introduction %>
+            <%= Faker::Number.number(300) %>
           </li>
         </ul>
         <%= link_to "編集", edit_user_path(@user), class: "btn btn-secondary btn-sm mt-4"%>
