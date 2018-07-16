@@ -9,15 +9,15 @@
   </head>
 
   <body>
-    <header class="sticky-top">
-      <% if admin_signed_in? %>
-        <%= render 'layouts/header/header_admins'  %>
-      <% else %>
-        <%= render 'layouts/header/header_users'  %>
-      <% end %>
-    </header>
+    <!--Header-->
+    <% if admin_signed_in? %>
+      <%= render 'layouts/header/header_admins'  %>
+    <% else %>
+      <%= render 'layouts/header/header_users'  %>
+    <% end %>
 
-    <div class="container">
+
+    <div class="container" style="padding-top:4.5rem;">
       <div class="row">
         <% if notice %>
           <p class="col-12 notice flash-message text-primary text-center"><%= notice %></p>

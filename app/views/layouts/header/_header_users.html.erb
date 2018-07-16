@@ -1,40 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-  <div class="container">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= fa_icon "heart", text: "日本酒" %>
-    <% end %>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <%= fa_icon "bars", text: "Menu" %>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <%= link_to 'Home', root_path, class: 'nav-link text-white' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'About', about_path, class: 'nav-link text-white' %>
-        </li>
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to current_user.name_code, user_path(current_user), class: 'nav-link text-white' %>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+  
+      <!-- Brand -->
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= fa_icon "heart", text: "日本酒" %>
+      <% end %>
+  
+      <!-- Collapse -->
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <%= fa_icon "bars", text: "Menu" %>
+      </button>
+  
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+            <%= link_to 'Home', root_path, class: 'nav-link waves-effect waves-light' %>
           </li>
-          <li class="nav-item">
-            <%= link_to 'Post', posts_path, class: 'nav-link text-white' %>
+          <li class="nav-item <%= 'active' if current_page?(about_path) %>">
+            <%= link_to 'About', about_path, class: 'nav-link' %>
           </li>
-          <li class="nav-item">
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link text-white' %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to 'Log in', new_user_session_path, class: 'nav-link text-white' %>
-          </li>
-          <li class="nav-item ml-2">
-            <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link text-white' %>
-          </li>
-        <% end %>
-      </ul>
+          <% if user_signed_in? %>
+            <li class="nav-item <%= 'active' if params[:controller] == 'users' %>">
+              <%= link_to current_user.name_code, user_path(current_user), class: 'nav-link' %>
+            </li>
+            <li class="nav-item <%= 'active' if params[:controller] == 'posts' %>">
+              <%= link_to 'Post', posts_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+        </ul>
+  
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-warning waves-effect waves-light' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Log in', new_user_session_path, class: 'btn btn-outline-light waves-effect waves-light' %>
+            </li>
+            <li class="nav-item ml-2">
+              <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-light waves-effect waves-light' %>
+            </li>
+          <% end %>
+        </ul>
+  
+      </div>
+  
     </div>
-
-  </div>
-</nav>
+  </nav>
+</header>
