@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy] # 投稿の編集と削除
   end
 
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy', as: 'logout'
+  end
+
   get '/about' => 'static_pages#about'
   root :to => 'static_pages#top'
 end

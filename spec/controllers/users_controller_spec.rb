@@ -187,7 +187,16 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#unsubscribe" do
-    context "as authorized user"
+    context "as authorized user" #do
+    #   before do
+    #     @user = FactoryBot.create(:user)
+    #     sign_in @user
+    #     post :unsubscribe, params: {id: @user.id, status: "1"}
+    #   end
+    #   it "is invalid status with 1" do
+    #     expect(@user.status).to eq 1
+    #   end
+    # end
     context "as an unauthorized user"
     context "as a guest"
   end

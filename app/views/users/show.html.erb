@@ -3,6 +3,8 @@
 
 <div class="row justify-content-center">
   <div class="col-4">
+    <%= link_to "編集", edit_user_path(current_user), class: "btn btn-secondary btn-sm mt-4"%>
+    <%= link_to "退会", confirm_user_path(current_user), class: "btn btn-secondary btn-sm mt-4"%>
     <div class="card border-secondary text-white text-center" style="height: 36em;">
       <div class="card-header font-weight-bold" style="background-color:#00008b;">
         ユーザー情報
@@ -31,7 +33,6 @@
             <%= Faker::Number.number(300) %>
           </li>
         </ul>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-secondary btn-sm mt-4"%>
       </div>
     </div>
   </div>

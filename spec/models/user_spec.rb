@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
       user = FactoryBot.build(:user, status: 1)
       expect(user.status).to eq 1
     end
-    it "status is 2" do
+    it "status is 2 => forced_drawal" do
       user = FactoryBot.build(:user, status: 2)
       expect(user.status).to eq 2
     end

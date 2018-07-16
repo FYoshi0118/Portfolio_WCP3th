@@ -23,14 +23,14 @@
     <div class="col-6">
       <div class="list-group">
 
-        <span class="list-group-item list-group-item-action flex-column align-items-start">
+        <span class="list-group-item list-group flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">・アカウント機能の停止</h5>
           </div>
           <p class="mb-1">ログインが出来なくなり、投稿した情報が出来なくなります。</p>
         </span>
 
-        <span class="list-group-item list-group-item-action flex-column align-items-start">
+        <span class="list-group-item flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">・アカウント復旧について</h5>
           </div>
@@ -40,9 +40,6 @@
     </div>
 
     <div class="col-12 text-center text-white mt-4">
-      <p class="flash-message text-danger text-center">
-        <%= flash[:unsubscribe_faled] %>
-      </p>
 
       <%= form_for(@user, :url => {:controller => :users, :action => :unsubscribe}, :method => "post") do |f| %>
         <p>

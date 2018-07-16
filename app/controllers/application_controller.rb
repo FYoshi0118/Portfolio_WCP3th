@@ -23,6 +23,18 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "アクセス権限がありません。"
     end
   end
+  
+  def check_login
+    if user_signed_in?
+      if current_user.status == 1
+        redirect_to logout_path
+        flash[:alert] = "退会処理を行ったためアクセス出来ません"
+      elsif current_user.status == 2
+        redirect_to logout_path
+        flash[:alert] = "アクセス権限を停止しています"
+      end
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :name_code, :email])

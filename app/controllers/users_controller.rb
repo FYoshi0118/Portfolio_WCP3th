@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user?
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :check_login, expect: [:unsubscribe]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :confirm, :unsubscribe]
 
   def show
   end
@@ -17,6 +18,17 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def unsubscribe
+    status = params[:user][:status].to_i
+    if status == 1
+      @user.update(status: params[:user][:status])
+      redirect_to logout_path, notice: "退会処理が完了しました。ご利用ありがとうございました。"
+    else
+      redirect_to confirm_user_path(current_user)
+      flash[:alert] = "チェックを入れて下さい。"
+    end
   end
 
   private
