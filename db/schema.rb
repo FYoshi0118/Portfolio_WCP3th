@@ -39,17 +39,17 @@ ActiveRecord::Schema.define(version: 20180711115939) do
 
   create_table "breweries", force: :cascade do |t|
     t.string "name", null: false
-    t.string "name_kana", null: false
-    t.string "post_code", limit: 7, null: false
-    t.string "address", null: false
+    t.string "post_code", limit: 7
+    t.string "address"
     t.string "phone_number", limit: 11
     t.string "email"
     t.string "url"
+    t.boolean "is_confirmed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_breweries_on_address"
+    t.index ["is_confirmed"], name: "index_breweries_on_is_confirmed"
     t.index ["name"], name: "index_breweries_on_name"
-    t.index ["name_kana"], name: "index_breweries_on_name_kana"
     t.index ["phone_number"], name: "index_breweries_on_phone_number"
   end
 
