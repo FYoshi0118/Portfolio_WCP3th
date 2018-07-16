@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20180711115939) do
     t.string "birthday"
     t.integer "status", default: 0, null: false
     t.text "introduction"
+    t.integer "posts_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["birthday"], name: "index_users_on_birthday"

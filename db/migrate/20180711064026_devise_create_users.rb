@@ -38,6 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :birthday, index: true
       t.integer :status, null: false, index: true, default: 0
       t.text :introduction
+      t.integer :posts_count, default: 0
 
       t.timestamps null: false
     end

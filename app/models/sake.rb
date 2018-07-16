@@ -1,6 +1,7 @@
 class Sake < ApplicationRecord
   belongs_to :brewery
   has_many :posts
+  has_many :users, through: :users
   # accepts_nested_attributes_for :posts
 
   validates :brand, presence: true

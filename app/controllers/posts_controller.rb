@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   before_action :check_login
 
   def index
-    @posts = Post.where(user_id: current_user.id)
+    # @posts = Post.where(user_id: current_user.id)
+    @user = User.find(params[:id])
   end
 
   def show
@@ -12,16 +13,12 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    # @post.sake.build
-    # @post.sake.brewery.build
+
   end
 
   def create
-    # @post = current_user.posts.new(post_params)
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    binding.pry
-    @post.save
+
   end
 
   def edit
