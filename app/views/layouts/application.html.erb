@@ -17,6 +17,17 @@
       <% end %>
     </header>
 
+    <div class="container">
+      <div class="row">
+        <% if notice %>
+          <p class="col-12 notice flash-message text-primary text-center"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="col-12 alert flash-message text-danger text-center"><%= alert %></p>
+        <% end %>
+      </div>
+    </div>
+
     <div class="main-container container-fluid">
       <%= yield %>
     </div>
@@ -26,6 +37,19 @@
         <p class="m-0 text-center text-white">Copyright &copy; Portfolio</p>
       </div>
     </footer>
+
+    <% if Rails.env.development?%>
+      <div class="debug">
+        <%= debug(response.status) %>
+        <p>response status</p>
+        <%= debug(params) %>
+        <p>params</p>
+        <%= debug(@user.inspect) %>
+        <p>@user</p>
+        <%= debug(current_user.inspect) %>
+        <p>current_user</p>
+      </div>
+    <% end %>
 
   </body>
 </html>

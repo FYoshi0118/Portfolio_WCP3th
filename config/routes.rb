@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, except: [:index, :new, :create]
+  get 'users/:id/confirm' => 'users#confirm', as: :confirm_user
+  post 'users/:id/confirm' => 'users#unsubscribe', as: :unsubscribe_user
   resources :posts
 
   # admin関連のルーティング
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   registrations: 'admins/registrations'
   }
+  get 'admins/top' => 'admins#top', as: :admin_top
   get 'admins/index' => 'admins#index', as: :admins
   resources :admins, except: [:index, :new, :create]
   namespace :admins do
@@ -21,6 +24,10 @@ Rails.application.routes.draw do
     resources :breweries # Breweryの登録・編集・削除
     resources :sakes # Sakeの登録・編集・削除
     resources :posts, only: [:index, :show, :destroy] # 投稿の編集と削除
+  end
+
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy', as: 'logout'
   end
 
   get '/about' => 'static_pages#about'

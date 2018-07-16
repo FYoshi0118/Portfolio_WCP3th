@@ -5,18 +5,18 @@ RSpec.describe User, type: :model do
     it "has a valid factory" do
       expect(FactoryBot.build(:user)).to be_valid
     end
-    
+    it "has a valid factory (birthday)" do
+      expect(FactoryBot.build(:birthday)).to be_valid
+    end
     it "the default for status is 0" do
       user = FactoryBot.build(:user)
       expect(user.status).to eq 0
     end
-
     it "status is 1" do
       user = FactoryBot.build(:user, status: 1)
       expect(user.status).to eq 1
     end
-
-    it "status is 2" do
+    it "status is 2 => forced_drawal" do
       user = FactoryBot.build(:user, status: 2)
       expect(user.status).to eq 2
     end
@@ -29,13 +29,11 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:name_code]).to include("can't be blank")
       end
-
       it "is invalid without nickname" do
         user = FactoryBot.build(:user, nickname: nil)
         user.valid?
         expect(user.errors[:nickname]).to include("can't be blank")
       end
-
       it "is invalid without email" do
         user = FactoryBot.build(:user, email: nil)
         user.valid?
@@ -50,7 +48,6 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:name_code]).to include("has already been taken")
       end
-
       it "is invalid duplicate email" do
         FactoryBot.create(:user, email: "test@test.com")
         user = FactoryBot.build(:user, email: "test@test.com")
@@ -85,20 +82,25 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:name_code]).to include("3～20文字以内で入力して下さい（半角英数字と_のみ使用可能）")
       end
-      it "passwordが5文字以下なら無効な状態であること" do
+      it "is invalid with password for 5 or less characters" do
         user = FactoryBot.build(:user, password: Faker::Number.number(5))
         user.valid?
         expect(user.errors[:password]).to include("6～20文字以内で入力して下さい。")
       end
-      it "passwordが21文字以上なら無効な状態であること" do
+      it "is invalid with password for 21 or more characters" do
         user = FactoryBot.build(:user, password: Faker::Number.number(21))
         user.valid?
         expect(user.errors[:password]).to include("6～20文字以内で入力して下さい。")
       end
-      it "introductionが201文字以上なら無効な状態であること" do
+      it "is invalid with introduction for 201 or more characters" do
         user = FactoryBot.build(:user, introduction: Faker::Number.number(201))
         user.valid?
         expect(user.errors[:introduction]).to include("200文字以下で入力して下さい。")
+      end
+      it "is invalid except birthday(YYYY/MM)" do
+        user = FactoryBot.build(:birthday, birthday: Faker::Number.number(6))
+        user.valid?
+        expect(user.errors[:birthday]).to include("YYYY/MMの形式（半角数字）で入力して下さい。")
       end
     end
   end
