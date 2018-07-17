@@ -1,14 +1,43 @@
 <h1>Posts#index</h1>
 <p>Find me in app/views/posts/index.html.erb</p>
-zzzz
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-3 bg-dark">
       <p class="text-center text-white">ここにユーザー情報</p>
     </div>
 
-    <div class="col bg-secondary">
-      <p class="text-center text-white">ここに投稿情報</p>
-    </div>
+    <div class="col-9">
+    <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">投稿一覧</p>
+      <% @user.posts.each do |post| %>
+        <table class="table table-sm table-striped"  style="table-layout: fixed; overflow: hidden;">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <%= post.updated_at %>.
+              </th>
+              <td>
+                <%= "ここは投稿画像" %>
+              </td>
+              <td>
+                <%= post.sake.brand %> 
+              </td>
+              <td>
+                <%= post.sake.brewery.name %> 
+              </td>
+              <td>
+                <%= post.star %> 
+              </td>
+              <td>
+                <%= post.content %> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>  
+
   </div>
 </div>

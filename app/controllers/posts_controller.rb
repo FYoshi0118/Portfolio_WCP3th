@@ -5,20 +5,21 @@ class PostsController < ApplicationController
 
   def index
     # @posts = Post.where(user_id: current_user.id)
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   def show
   end
 
   def new
-    @post = Post.new
-
+    @brewery = Brewery.new
+    @sake = @brewery.sakes.build
+    @post = @sake.posts.build
   end
 
   def create
-    @post = Post.new(post_params)
-
+    @brewery = Brewery.new(post_params)
+    binding.pry
   end
 
   def edit
@@ -33,7 +34,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :image_id, :star)
+    params.require(:brewery).permit(:name,
+                                    sakes_attributes: [:brand, :specially_designated,
+                                                               :recipe, :flavor, :nihonshudo, :acidity,
+                                                       posts_attributes: [:user_id, :content, :image, :star
+                                    ]])
   end
 
   def set_post

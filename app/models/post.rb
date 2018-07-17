@@ -1,9 +1,7 @@
 class Post < ApplicationRecord
-  belongs_to :user, counter_cache: true
-  belongs_to :sake
+  belongs_to :sake, optional: true
+  belongs_to :user, optional: true, counter_cache: true
 
-  validates :user_id, presence: true
-  validates :sake_id, presence: true
   validates :content, presence: true, length: { maximum: 200}
   validates :star, presence: true
 end

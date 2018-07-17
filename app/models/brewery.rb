@@ -1,7 +1,7 @@
 class Brewery < ApplicationRecord
   has_many :sakes
+  accepts_nested_attributes_for :sakes
   has_many :posts, through: :sakes
-  # accepts_nested_attributes_for :sakes
 
   validates :name, presence: true
   validates :post_code,

@@ -1,8 +1,8 @@
 class Sake < ApplicationRecord
-  belongs_to :brewery
+  belongs_to :brewery, optional: true
   has_many :posts
+  accepts_nested_attributes_for :posts
   has_many :users, through: :users
-  # accepts_nested_attributes_for :posts
 
   validates :brand, presence: true
   validates :flavor, inclusion: { in: [nil, '燻酒', '爽酒', '熟酒', '醇酒'] }

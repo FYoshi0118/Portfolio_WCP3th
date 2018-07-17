@@ -1,2 +1,48 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="container">
+  <div class="py-2 text-center">
+    <h2>新規投稿</h2>
+  </div>
+  <div class="row">
+
+    <!--サイドバー-->
+    <div class="col-4">
+      <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
+    </div>
+
+    <!--投稿フォーム-->
+    <div class="col-6">
+      <!--蔵元-->
+      <%= form_for(@brewery, url: posts_path) do |brewery_field|  %>
+        <div class="mb-3">
+          <%= brewery_field.label :name, "蔵元" %>
+          <%= brewery_field.text_field :name, class: "form-control" %>
+        </div>
+
+        <!--日本酒-->
+        <hr class="mb-2">
+        <%= brewery_field.fields_for :sakes do |sake_field| %>
+          <div class="mb-3">
+            <%= sake_field.label :brand, "日本酒名" %>
+            <%= sake_field.text_field :brand, class: "form-control" %>
+          </div>
+
+          <!--投稿-->
+          <hr class="mb-2">
+          <%= sake_field.fields_for :posts do |post_field| %>
+            <div class="mb-3">
+              <%= post_field.label :content, "投稿内容" %>
+              <%= post_field.text_field :content, class: "form-control" %>
+            </div>
+            <%= post_field.hidden_field :user_id, value: current_user.id %>
+          <% end %>
+
+        <% end %>
+
+        <%= brewery_field.submit "-投稿する-", class: "btn btn-primary btn-block" %>
+      <% end %>
+    </div>
+    <%= debug(@brewery.inspect) %>
+    <%= debug(@sake.inspect) %>
+    <%= debug(@post.inspect) %>
+  </div>
+</div>
