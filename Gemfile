@@ -31,6 +31,10 @@ gem "font-awesome-rails"
 # seed-fu
 gem 'seed-fu'
 
+# refile
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'

@@ -1,14 +1,13 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
-
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-3 bg-dark">
-      <p class="text-center text-white">ここにユーザー情報</p>
+    <div class="col-3">
+      <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
     </div>
 
-    <div class="col-9">
-    <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">投稿一覧</p>
+    <div class="col-8">
+      <h4 class="d-flex justify-content-center">
+        <span class="text-muted">投稿一覧</span>
+      </h4>
       <% @user.posts.each do |post| %>
         <table class="table table-sm table-striped"  style="table-layout: fixed; overflow: hidden;">
           <thead>
@@ -16,7 +15,7 @@
           <tbody>
             <tr>
               <th scope="row">
-                <%= post.updated_at %>.
+                <%= post.updated_at.strftime('%Y/%m/%d　%H:%M:%S') %>.
               </th>
               <td>
                 <%= "ここは投稿画像" %>
@@ -31,7 +30,10 @@
                 <%= post.star %> 
               </td>
               <td>
-                <%= post.content %> 
+                <%= link_to '詳細', edit_post_path(post.id) %>
+                <div></div>
+                <%= link_to '削除', post_path(post.id), method: :delete,
+                                                        data: {confirm: "本当に削除しますか？"} %>
               </td>
             </tr>
           </tbody>

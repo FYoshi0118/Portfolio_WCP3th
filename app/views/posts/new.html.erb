@@ -2,6 +2,122 @@
   <div class="py-2 text-center">
     <h2>新規投稿</h2>
   </div>
+  
+  
+  
+  <div class="row justify-content-center">
+
+    <!--サイドバー-->
+    <div class="col-3">
+      <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
+    </div>
+
+    <!--投稿フォーム-->
+    <div class="col-8">
+      <!--蔵元-->
+      <legend>日本酒情報</legend>
+      <%= form_for(@brewery, url: posts_path) do |brewery_field|  %>
+        <% if @brewery.errors.any? %>
+          <%= @brewery.errors.count %>件のエラーが発生しました
+          <% @brewery.errors.full_message.each do |message| %>
+              <%= message %>
+          <% end %>
+        <% end %>
+        <% if @sake.errors.any? %>
+          <%= @sake.errors.count %>件のエラーが発生しました
+          <% @sake.errors.full_message.each do |message| %>
+              <%= message %>
+          <% end %>
+        <% end %>
+        <div class="mb-3">
+          <%= brewery_field.label :name, "蔵元名（必須）" %>
+          <%= brewery_field.text_field :name, placeholder: "○○酒造",
+                                              class: "form-control border border-warning" %>
+        </div>
+        <%= brewery_field.hidden_field :id%>
+
+        <!--日本酒-->
+        <%= brewery_field.fields_for :sakes do |sake_field| %>
+          <div class="mb-3">
+            <%= sake_field.label :brand, "日本酒名（必須）" %>
+            <%= sake_field.text_field :brand, class: "form-control border border-warning" %>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <%= sake_field.label :specially_designated, "特定名称" %>
+              <%= sake_field.text_field :specially_designated, placeholder: "例）純米酒、上撰など",
+                                                               class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <%= sake_field.label :recipe, "製法" %>
+              <%= sake_field.text_field :recipe, placeholder: "例）無濾過生原酒",
+                                                 class: "form-control" %>
+            </div>
+          </div>
+          <div class="mb-3"></div>
+          <div class="row">
+            <div class="col-6">
+              <%= sake_field.label :nihonshudo, "日本酒度" %>
+              <%= sake_field.number_field :nihonshudo, placeholder: "例）-1.0",
+                                                       class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <%= sake_field.label :acidity, "製法" %>
+              <%= sake_field.number_field :acidity, placeholder: "例）1.0",
+                                                    class: "form-control" %>
+            </div>
+          </div>
+          <%= sake_field.hidden_field :id%>
+
+          <!--投稿-->
+          <hr class="mb-2">
+          <%= field_set_tag "投稿内容" do %>
+            <% if @post.errors.any? %>
+              <%= @post.errors.count %>件のエラーが発生しました
+              <% @post.errors.full_message.each do |message| %>
+                  <%= message %>
+              <% end %>
+            <% end %>
+            <%= sake_field.fields_for :posts do |post_field| %>
+              <div class="row">
+                <div class="col-6">
+                  <%= post_field.label :star, "評価（必須）" %>
+                  <%= post_field.text_field :star, placeholder: "例）-1.0",
+                                                           class: "form-control border border-warning" %>
+                </div>
+                <div class="col-6">
+                  <%= post_field.label :image, "画像" %>
+                  <%= post_field.attachment_field :image, class: "form-control" %>
+                </div>
+              </div>
+              <div class="mb-3">
+                <%= post_field.label :content, "本文（必須）" %>
+                <%= post_field.text_area :content, rows: "5",
+                                                   class: "form-control border border-warning" %>
+              </div>
+              <%= post_field.hidden_field :user_id, value: current_user.id %>
+              <%= post_field.hidden_field :id%>
+            <% end %>
+          <% end %>
+
+        <% end %>
+
+        <%= brewery_field.submit "-投稿する-", class: "btn btn-primary btn-block" %>
+      <% end %>
+    </div>
+    <%= debug(@brewery.inspect) %>
+    <%= debug(@sake.inspect) %>
+    <%= debug(@post.inspect) %>
+  </div>
+</div>
+
+<%
+=begin
+%>
+<div class="container">
+  <div class="py-2 text-center">
+    <h2>新規投稿</h2>
+  </div>
   <div class="row">
 
     <!--サイドバー-->
@@ -17,6 +133,7 @@
           <%= brewery_field.label :name, "蔵元" %>
           <%= brewery_field.text_field :name, class: "form-control" %>
         </div>
+        <%= brewery_field.hidden_field :id%>
 
         <!--日本酒-->
         <hr class="mb-2">
@@ -25,6 +142,7 @@
             <%= sake_field.label :brand, "日本酒名" %>
             <%= sake_field.text_field :brand, class: "form-control" %>
           </div>
+          <%= sake_field.hidden_field :id%>
 
           <!--投稿-->
           <hr class="mb-2">
@@ -34,6 +152,7 @@
               <%= post_field.text_field :content, class: "form-control" %>
             </div>
             <%= post_field.hidden_field :user_id, value: current_user.id %>
+            <%= post_field.hidden_field :id%>
           <% end %>
 
         <% end %>
@@ -46,3 +165,6 @@
     <%= debug(@post.inspect) %>
   </div>
 </div>
+<%
+=end
+%>

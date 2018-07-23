@@ -18,7 +18,7 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item <%= 'active' if current_page?(root_path) %>">
-            <%= link_to 'Home', root_path, class: 'nav-link waves-effect waves-light' %>
+            <%= link_to 'Home', root_path, class: 'nav-link' %>
           </li>
           <li class="nav-item <%= 'active' if current_page?(about_path) %>">
             <%= link_to 'About', about_path, class: 'nav-link' %>
@@ -27,8 +27,11 @@
             <li class="nav-item <%= 'active' if params[:controller] == 'users' %>">
               <%= link_to current_user.name_code, user_path(current_user), class: 'nav-link' %>
             </li>
-            <li class="nav-item <%= 'active' if params[:controller] == 'posts' %>">
-              <%= link_to 'Post', posts_path, class: 'nav-link' %>
+            <li class="nav-item <%= 'active' if current_page?(posts_path) %>">
+              <%= link_to '投稿一覧', posts_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item <%= 'active' if current_page?(new_post_path(current_user)) %>">
+              <%= link_to '新規投稿', new_post_path(current_user), class: 'nav-link' %>
             </li>
           <% end %>
         </ul>
@@ -37,14 +40,14 @@
         <ul class="navbar-nav nav-flex-icons">
           <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-warning waves-effect waves-light' %>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-outline-warning text-warning' %>
             </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to 'Log in', new_user_session_path, class: 'btn btn-outline-light waves-effect waves-light' %>
+              <%= link_to 'Log in', new_user_session_path, class: 'nav-link btn btn-outline-info text-info' %>
             </li>
             <li class="nav-item ml-2">
-              <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-light waves-effect waves-light' %>
+              <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link btn btn-outline-secondary text-secondary' %>
             </li>
           <% end %>
         </ul>
