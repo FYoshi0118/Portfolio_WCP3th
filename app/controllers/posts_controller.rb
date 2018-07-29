@@ -35,7 +35,6 @@ class PostsController < ApplicationController
 
     @post = Post.new(post_params[:sakes_attributes][:"0"][:posts_attributes][:"0"])
     @post.sake_id = @sake.id
-    binding.pry
   end
 
   def edit
