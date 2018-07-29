@@ -15,13 +15,6 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :name_code, "ID" %>
-            <%= f.text_field :name_code, placeholder: "@から始める英数字を入力して下さい",
-                                          class: "form-control" %>
-            <small class="text-muted">あなたのメールは他の誰とも共有しません。</small>
-          </div>
-
-          <div class="form-group">
             <%= f.label :email, "メールアドレス" %>
             <%= f.email_field :email, autocomplete:"email",
                                       placeholder: "メールアドレスを入力して下さい",

@@ -9,9 +9,10 @@
           <h2 class="text-center font-weight-bold">ログイン</h2>
 
           <div class="form-group">
-            <%= f.label :name_code, "ID" %>
-            <%= f.text_field :name_code, placeholder: "@～",
-                                         class: "form-control" %>
+            <%= f.label :email, "email" %>
+            <%= f.email_field :email, autofocus: true, 
+                                      placeholder: "メールアドレスを入力して下さい",
+                                      class: "form-control" %>
           </div>
 
           <div class="form-group">
