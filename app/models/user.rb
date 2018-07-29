@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
+  has_many :sakes, through: :sakes
 
   validates :name_code, presence: true, uniqueness: true,
     format: {

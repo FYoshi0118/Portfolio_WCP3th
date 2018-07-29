@@ -1,9 +1,13 @@
 class Post < ApplicationRecord
-  belongs_to :user
-  belongs_to :sake
+  attachment :image
 
-  validates :user_id, presence: true
-  validates :sake_id, presence: true
-  validates :content, presence: true, length: { maximum: 200}
-  validates :star, presence: true
+  belongs_to :sake, optional: true
+  belongs_to :user, optional: true, counter_cache: true
+
+  validates :content, presence: true, length: {maximum: 200}
+  validates :star, presence: true,
+                   length: {
+                     minimum: 0, maximum: 5,
+                     message: "星評価に変える"
+                   }
 end

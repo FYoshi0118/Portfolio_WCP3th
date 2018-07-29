@@ -4,24 +4,37 @@ class PostsController < ApplicationController
   before_action :check_login
 
   def index
-    @posts = Post.where(user_id: current_user.id)
+    # @posts = Post.where(user_id: current_user.id)
+    @user = User.find(current_user.id)
   end
 
   def show
   end
 
   def new
-    @post = Post.new
-    # @post.sake.build
-    # @post.sake.brewery.build
+    @brewery = Brewery.new
+    @sake = @brewery.sakes.build
+    @post = @sake.posts.build
   end
 
   def create
-    # @post = current_user.posts.new(post_params)
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    binding.pry
-    @post.save
+    # @brewery = Brewery.new(brewery_params)
+    # if @brewery = Brewery.find_by(name: brewery_params[:name])
+    #   binding.pry
+    #   return @brewery
+    # else
+    #   @brewery = Brewery.new(brewery)
+    #   render :new unless @brewery.save
+    # end
+    @brewery = Brewery.find_or_create_by(name: brewery_params[:name])
+
+    unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
+      @sake = Sake.new(sake_params[:sakes_attributes][:"0"])
+      @sake.brewery_id = @brewery.id
+    end
+
+    @post = Post.new(post_params[:sakes_attributes][:"0"][:posts_attributes][:"0"])
+    @post.sake_id = @sake.id
   end
 
   def edit
@@ -31,16 +44,35 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post.destroy
   end
 
   private
 
-  def post_params
-    params.require(:post).permit(:content, :image_id, :star)
-  end
-
   def set_post
     @post = Post.find(params[:id])
   end
+
+  def brewery_params
+    params.require(:brewery).permit(:name)
+  end
+
+  def sake_params
+    params.require(:brewery).permit(sakes_attributes: [:brand, :specially_designated,
+                                                       :recipe, :flavor, :nihonshudo, :acidity
+                                                       ])
+  end
+
+  def post_params
+    params.require(:brewery).permit(sakes_attributes: [posts_attributes: [:user_id, :content, :image, :star]])
+  end
+
+  # def all_params
+  #   params.require(:brewery).permit(:name,
+  #                                   sakes_attributes: [:brand, :specially_designated,
+  #                                                     :recipe, :flavor, :nihonshudo, :acidity,
+  #                                                     posts_attributes: [:user_id, :content, :image, :star
+  #                                   ]])
+  # end
 
 end
