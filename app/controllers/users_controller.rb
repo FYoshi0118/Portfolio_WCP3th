@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_admin!
   before_action :ensure_correct_user?
   before_action :check_login, expect: [:unsubscribe]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :confirm, :unsubscribe]
