@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admins::SakesController, type: :controller do
+RSpec.describe Admin::BreweriesController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do

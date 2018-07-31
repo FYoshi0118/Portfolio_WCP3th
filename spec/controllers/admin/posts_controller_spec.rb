@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admins::UsersController, type: :controller do
+RSpec.describe Admin::PostsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
