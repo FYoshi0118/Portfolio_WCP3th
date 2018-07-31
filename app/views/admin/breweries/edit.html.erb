@@ -7,11 +7,11 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-				<h2>蔵元新規登録</h2>
+				<h2>蔵元詳細・編集</h2>
 			</div>
 
-			<%= render 'form', brewery: @brewery, url: admin_breweries_path,
-																						submit: "-登録する-" %>
+			<%= render 'form', brewery: @brewery, url: admin_brewery_path(@brewery.id),
+																						submit: "-編集する-" %>
 
     </main>
 
