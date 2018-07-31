@@ -1,4 +1,4 @@
-<%= form_for(brewery, url: url) do |f| %>
+<%= form_for(brewery, url: url) do |brewery_field| %>
   <% if brewery.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -16,13 +16,56 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="mb-3">
-          <%= f.label :name, "蔵元名（必須）" %>
-          <%= f.text_field :name, placeholder: "○○酒造",
-                                  class: "form-control border border-warning" %>
+          <%= brewery_field.label :name, "蔵元名（必須）" %>
+          <%= brewery_field.text_field :name, placeholder: "○○酒造",
+                                              class: "form-control border border-warning" %>
         </div>
-        <%= f.submit submit, class: "btn btn-primary" %>
+
+        <!--日本酒-->
+        <%= brewery_field.fields_for :sakes do |sake_field| %>
+          <div class="mb-3">
+            <%= sake_field.label :brand, "日本酒名（必須）" %>
+            <%= sake_field.text_field :brand, class: "form-control border border-warning" %>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <%= sake_field.label :specially_designated, "特定名称" %>
+                <%= sake_field.text_field :specially_designated, placeholder: "例）純米酒、上撰など",
+                                                                 class: "form-control" %>
+              </div>
+              <div class="col-6">
+                <%= sake_field.label :recipe, "製法" %>
+                <%= sake_field.text_field :recipe, placeholder: "例）無濾過生原酒",
+                                                   class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <%= sake_field.label :nihonshudo, "日本酒度" %>
+                <%= sake_field.number_field :nihonshudo, placeholder: "例）-1.0",
+                                                         class: "form-control" %>
+              </div>
+              <div class="col-6">
+                <%= sake_field.label :acidity, "製法" %>
+                <%= sake_field.number_field :acidity, placeholder: "例）1.0",
+                                                      class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <%= sake_field.label :is_confirmed, "管理者確認：" %>
+            <%= sake_field.select :is_confirmed, 
+              { "確認済み" => true, "未確認" => false } %>
+          </div>
+          <%= sake_field.hidden_field :id %>
+        <% end %>
+
+        <%= brewery_field.submit submit, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
-  
+
 <% end %>

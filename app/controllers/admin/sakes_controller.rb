@@ -12,15 +12,38 @@ class Admin::SakesController < ApplicationController
   end
 
   def create
-    @brewery = Brewery.find_or_create_by(name: brewery_params[:name])
-
-    unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
-      @sake = Sake.new(sake_params[:sakes_attributes][:"0"])
-      @sake.brewery_id = @brewery.id
+    # 蔵元がある場合
+    if @brewery = Brewery.find_by(name: brewery_params[:name])
+      @sake = @brewery.sakes.build(sake_params[:sakes_attributes][:"0"])
+      if @sake.save
+        redirect_to edit_admin_sake_path(@sake), notice: "登録しました"
+      else
+        render :new
+      end
+    else # 蔵元がない場合
+      @brewery = Brewery.new(name: brewery_params[:name])
+      if @brewery.save
+        @sake = @brewery.sakes.build(sake_params[:sakes_attributes][:"0"])
+        if @sake.save
+          redirect_to edit_admin_sake_path(@sake), notice: "登録しました"
+        else
+          render :new
+        end
+      else
+        render :new
+      end
     end
+  binding.pry
+    # @brewery = Brewery.find_or_create_by(name: brewery_params[:name])
+
+    # unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
+    #   @sake = Sake.new(sake_params[:sakes_attributes][:"0"])
+    #   @sake.brewery_id = @brewery.id
+    # end
   end
 
   def edit
+    @brewery = @sake.brewery
   end
 
   def update
@@ -52,8 +75,8 @@ class Admin::SakesController < ApplicationController
   end
 
   def sake_params
-    params.require(:brewery).permit(sakes_attributes: [:brand, :specially_designated,
-                                                       :recipe, :flavor, :nihonshudo, :acidity
+    params.require(:brewery).permit(sakes_attributes: [:brand, :specially_designated, :recipe,
+                                                       :flavor, :nihonshudo, :acidity, :is_confirmed
                                                        ])
   end
 
