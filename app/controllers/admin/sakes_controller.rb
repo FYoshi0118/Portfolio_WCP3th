@@ -12,7 +12,6 @@ class Admin::SakesController < ApplicationController
   end
 
   def create
-    # 蔵元がある場合
     if @brewery = Brewery.find_by(name: brewery_params[:name])
       @sake = @brewery.sakes.build(sake_params[:sakes_attributes][:"0"])
       if @sake.save
@@ -33,13 +32,6 @@ class Admin::SakesController < ApplicationController
         render :new
       end
     end
-  binding.pry
-    # @brewery = Brewery.find_or_create_by(name: brewery_params[:name])
-
-    # unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
-    #   @sake = Sake.new(sake_params[:sakes_attributes][:"0"])
-    #   @sake.brewery_id = @brewery.id
-    # end
   end
 
   def edit
