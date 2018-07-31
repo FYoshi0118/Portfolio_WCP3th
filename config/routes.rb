@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   }
   get 'admins/top' => 'admins#top', as: :admin_top
   get 'admins/index' => 'admins#index', as: :admins
-  resources :admins, except: [:index, :new, :create]
+  resources :admins, except: [:index]
   namespace :admins do
     resources :users, except: [:new, :create] # userの編集と削除
     resources :breweries # Breweryの登録・編集・削除
