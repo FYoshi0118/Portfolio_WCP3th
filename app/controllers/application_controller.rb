@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if admin_signed_in?
-      admin_top_path
+      admins_path
     else
       posts_path
     end
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :family_name, :given_name, :is_main_administer])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:email])
   end
 
