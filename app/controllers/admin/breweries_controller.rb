@@ -3,7 +3,8 @@ class Admin::BreweriesController < ApplicationController
   before_action :set_brewery, only: [:edit, :update]
 
   def index
-    @breweries = Brewery.all
+    @search = Brewery.ransack(params[:q])
+		@breweries = @search.result.page(params[:page]).reverse_order
   end
 
   def new
@@ -13,7 +14,7 @@ class Admin::BreweriesController < ApplicationController
   def create
     @brewery = Brewery.new(brewery_params)
     if @brewery.save
-      redirect_to admin_breweries_path, notice: "蔵元情報を登録しました"
+      redirect_to admin_breweries_path, notice: "#{@brewery.name}を登録しました"
     else
       render :new
     end
@@ -24,7 +25,7 @@ class Admin::BreweriesController < ApplicationController
 
   def update
     @brewery.update(brewery_params)
-    redirect_to edit_admin_brewery_path(@brewery.id), notice: "更新しました"
+    redirect_to edit_admin_brewery_path(@brewery.id), notice: "#{@brewery.name}を更新しました"
   end
 
   private
