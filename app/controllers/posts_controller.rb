@@ -27,7 +27,6 @@ class PostsController < ApplicationController
     #   @brewery = Brewery.new(brewery)
     #   render :new unless @brewery.save
     # end
-    binding.pry
     @brewery = Brewery.find_or_create_by(name: brewery_params[:name])
 
     unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
@@ -35,8 +34,8 @@ class PostsController < ApplicationController
       @sake.brewery_id = @brewery.id
       @sake.save
     end
-    binding.pry
     @post = Post.new(post_params[:sakes_attributes][:"0"][:posts_attributes][:"0"])
+    binding.pry
     @post.sake_id = @sake.id
     @post.save
     

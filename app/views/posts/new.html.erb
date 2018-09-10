@@ -63,7 +63,7 @@
                                                     class: "form-control" %>
             </div>
           </div>
-          <%= sake_field.hidden_field :id%>
+          <%= sake_field.hidden_field :id %>
 
           <!--投稿-->
           <hr class="mb-2">
@@ -76,9 +76,10 @@
             <% end %>
             <%= sake_field.fields_for :posts do |post_field| %>
               <div class="row">
-                <div class="col-6">
-                  <%= post_field.label :star, "評価（必須）（星にする）" %>
-                  <%= post_field.text_field :star, placeholder: "例）-1.0",
+                <div class="col-6q" id ="star">
+                  <%= post_field.label :star, "評価（必須）" %><br>
+                  <%= post_field.hidden_field :star, id: :post_star %>
+                  <%#= post_field.text_field :star, placeholder: "例）-1.0",
                                                            class: "form-control border border-warning" %>
                 </div>
                 <div class="col-6">
@@ -92,7 +93,7 @@
                                                    class: "form-control border border-warning" %>
               </div>
               <%= post_field.hidden_field :user_id, value: current_user.id %>
-              <%= post_field.hidden_field :id%>
+              <%= post_field.hidden_field :id %>
             <% end %>
           <% end %>
 
@@ -101,6 +102,16 @@
         <%= brewery_field.submit "-投稿する-", class: "btn btn-primary btn-block" %>
       <% end %>
     </div>
+
+    <script>
+      $('#star').raty({
+        path: '/assets/',
+        click: function(score, e) {
+          $("#post_star").val(score)
+        }
+      });
+    </script>
+
     <%= debug(@brewery.inspect) %>
     <%= debug(@sake.inspect) %>
     <%= debug(@post.inspect) %>
