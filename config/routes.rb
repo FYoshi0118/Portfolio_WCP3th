@@ -1,24 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'posts/index'
-  end
-
-  namespace :admin do
-    get 'posts/new'
-  end
-
-  namespace :admin do
-    get 'sakes/index'
-  end
-
-  namespace :admin do
-    get 'users/index'
-  end
-
-  namespace :admin do
-    get 'breweries/index'
-  end
-
   # user関連のルーティング
   devise_for :users, controllers: {
     sessions:      'users/sessions',

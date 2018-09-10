@@ -1,12 +1,8 @@
 <div class="container">
-  <div class="py-2 text-center">
-    <h2>新規投稿</h2>
-  </div>
-  
-  
-  
-  <div class="row justify-content-center">
 
+  <%= render 'layouts/navbar_users.html.erb' %>
+
+  <div class="row justify-content-center">
     <!--サイドバー-->
     <div class="col-3">
       <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
@@ -81,7 +77,7 @@
             <%= sake_field.fields_for :posts do |post_field| %>
               <div class="row">
                 <div class="col-6">
-                  <%= post_field.label :star, "評価（必須）" %>
+                  <%= post_field.label :star, "評価（必須）（星にする）" %>
                   <%= post_field.text_field :star, placeholder: "例）-1.0",
                                                            class: "form-control border border-warning" %>
                 </div>
