@@ -6,9 +6,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   </head>
 
-  <body class="bg-light">
+  <body>
     <!--Header-->
     <% if admin_signed_in? %>
       <%= render 'layouts/header/header_admins'  %>
@@ -16,17 +17,20 @@
       <%= render 'layouts/header/header_users'  %>
     <% end %>
 
-
-    <div class="container" style="padding-top:4.5rem;">
-      <div class="row">
-        <% if notice %>
+    <% if notice %>
+      <div class="container" style="padding-top:4.5rem;">
+        <div class="row">
           <p class="col-12 notice flash-message text-primary text-center"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="col-12 alert flash-message text-danger text-center"><%= alert %></p>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+    <% if alert %>
+      <div class="container" style="padding-top:4.5rem;">
+        <div class="row">
+          <p class="col-12 alert flash-message text-danger text-center"><%= alert %></p>
+        </div>
+      </div>
+    <% end %>
 
     <div>
       <%= yield %>
