@@ -1,9 +1,16 @@
-<ul class="nav nav-tabs nav-justified mb-5">
+<ul class="nav nav-tabs nav-justified my-5">
   <li class="nav-item">
     <% if params[:controller] == 'users' %>
       <%= link_to 'ユーザー情報', user_path(current_user), class: 'nav-link active' %>
     <% else %>
       <%= link_to 'ユーザー情報', user_path(current_user), class: 'nav-link' %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <% if current_page?(new_post_path(current_user)) %>
+      <%= link_to '新規投稿', new_post_path(current_user), class: 'nav-link active' %>
+    <% else %>
+      <%= link_to '新規投稿', new_post_path(current_user), class: 'nav-link' %>
     <% end %>
   </li>
   <li class="nav-item">
@@ -14,11 +21,10 @@
     <% end %>
   </li>
   <li class="nav-item">
-    <% if current_page?(new_post_path(current_user)) %>
-      <%= link_to '新規投稿', new_post_path(current_user), class: 'nav-link active' %>
-    <% else %>
-      <%= link_to '新規投稿', new_post_path(current_user), class: 'nav-link' %>
-    <% end %>
+    <%# if current_page?(posts_path) %>
+      <%#= link_to '投稿解析', '#', class: 'nav-link active' %>
+    <%# else %>
+      <%= link_to '投稿解析', '#', class: 'nav-link' %>
+    <%# end %>
   </li>
-  <li class="nav-item"><a href="#" class="nav-link disabled">無効</a></li>
 </ul>
