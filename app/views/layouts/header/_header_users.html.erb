@@ -28,6 +28,9 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <% if user_signed_in? %>
+            <li class="nav-item mr-3 <%= 'active' if params[:controller] == 'users' %>">
+              <%= link_to current_user.nickname, user_path(current_user), class: 'nav-link' %>
+            </li>
             <li class="nav-item">
               <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-outline-warning text-warning' %>
             </li>

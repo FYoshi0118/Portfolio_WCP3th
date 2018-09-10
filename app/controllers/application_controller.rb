@@ -24,7 +24,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "アクセス権限がありません。"
     end
   end
-  
+
+  def ensure_correct_analysis_user?
+    unless @post.user == current_user
+      redirect_to root_path, alert: "アクセス権限がありません。"
+    end
+  end
+
   def check_login
     if user_signed_in?
       if current_user.status == 1

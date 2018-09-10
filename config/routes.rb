@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'analyses/index'
+
   # user関連のルーティング
   devise_for :users, controllers: {
     sessions:      'users/sessions',
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/:id/confirm' => 'users#confirm', as: :confirm_user
   post 'users/:id/confirm' => 'users#unsubscribe', as: :unsubscribe_user
   resources :posts
+  resources :analyses, only: [:index]
 
   # admin関連のルーティング
   devise_for :admins, controllers: {
