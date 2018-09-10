@@ -3,46 +3,32 @@
   <%= render 'layouts/navbar_users.html.erb' %>
 
   <div class="row justify-content-center">
-    <div class="col-3">
-      <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
-    </div>
 
-    <div class="col-8">
-      <div class="row my-5">
-        <div class="col-6 text-center">
-          ここにグラフ
-        </div>
-        <div class="col-6 text-center">
-          ここにグラフ
-        </div>
-      </div>
-
-      <h4 class="d-flex justify-content-center border-bottom mb-3">
-        <span class="text-muted">投稿一覧</span>
-      </h4>
+    <div class="col-10 mb-5">
 
       <% @user.posts.each do |post| %>
         <table class="table table-sm table-striped"  style="table-layout: fixed; overflow: hidden;">
           <thead>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">
-                <%= post.updated_at.strftime('%Y/%m/%d　%H:%M:%S') %>.
+            <tr class="text-center align-middle">
+              <th scope="row" class="align-middle">
+                <%= post.updated_at.strftime('%Y/%m/%d　%H:%M') %>.
               </th>
-              <td>
-                <%= "ここは投稿画像" %>
-              </td>
-              <td>
+              <td class="align-middle">
                 <%= post.sake.brand %> 
               </td>
-              <td>
+              <td class="align-middle">
                 <%= post.sake.brewery.name %> 
               </td>
-              <td>
-                <%= post.star %> 
+              <td class="align-middle">
+                <%= "★" if post.star == 1 %>
+                <%= "★★"  if post.star == 2 %>
+                <%= "★★★"  if post.star == 3 %>
+                <%= "★★★★"  if post.star == 4 %>
+                <%= "★★★★★"  if post.star == 5 %>
               </td>
-              <td>
+              <td class="align-middle">
                 <%= link_to '詳細', edit_post_path(post.id) %>
                 <div></div>
                 <%= link_to '削除', post_path(post.id), method: :delete,
