@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :authenticate_admin!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_post_user?, except: [:index, :new, :create] # application_controller
   before_action :check_login
@@ -31,10 +32,14 @@ class PostsController < ApplicationController
     unless @sake = Sake.find_by(brand: sake_params[:sakes_attributes][:"0"][:brand])
       @sake = Sake.new(sake_params[:sakes_attributes][:"0"])
       @sake.brewery_id = @brewery.id
+      @sake.save
     end
-
     @post = Post.new(post_params[:sakes_attributes][:"0"][:posts_attributes][:"0"])
+    binding.pry
     @post.sake_id = @sake.id
+    @post.save
+    
+    redirect_to posts_path, notice: "投稿しました。"
   end
 
   def edit

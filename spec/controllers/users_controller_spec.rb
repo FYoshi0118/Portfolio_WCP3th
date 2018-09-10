@@ -106,7 +106,6 @@ RSpec.describe UsersController, type: :controller do
       before do
         @user = FactoryBot.create(:user)
         @user_params = FactoryBot.attributes_for(:user, nickname: "更新1",
-                                                      name_code: "@update1",
                                                       birthday: "2018/07",
                                                       email: "update1@wcp.com",
                                                       introduction: "update test1"
@@ -118,7 +117,6 @@ RSpec.describe UsersController, type: :controller do
         patch :update, params: {id: @user.id, user: @user_params}
         @user.reload
         expect(@user.nickname).to eq "更新1"
-        expect(@user.name_code).to eq "@update1"
         expect(@user.birthday).to eq "2018/07"
         expect(@user.email).to eq "update1@wcp.com"
         expect(@user.introduction).to eq "update test1"

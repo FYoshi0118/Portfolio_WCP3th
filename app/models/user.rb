@@ -4,12 +4,6 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :sakes, through: :sakes
-
-  validates :name_code, presence: true, uniqueness: true,
-    format: {
-      with: /\A@[\w]{3,20}\z/,
-      message: "3～20文字以内で入力して下さい（半角英数字と_のみ使用可能）"
-    }
     
   validates :nickname, presence: true
 

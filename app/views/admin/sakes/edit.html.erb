@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row">
+    <!--サイドバー-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <%= render 'layouts/sidebar/sidebar_admins.html.erb' %>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<h2>日本酒詳細・編集</h2>
+			</div>
+
+			<%= form_for(@sake, url: admin_sake_path(@sake.id) ) do |sake_field| %>
+        <% if @sake.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= @sake.errors.count %>件のエラーが発生しました
+            </h2>
+            <ul>
+              <% @sake.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <div class="mb-3">
+                <%= sake_field.fields_for @sake.brewery do |brewery_field| %>
+                  <%= brewery_field.label :name, "蔵元名（必須）" %>
+                  <%= brewery_field.text_field :name, placeholder: "○○酒造",
+                                                      class: "form-control border border-warning" %>
+                <% end %>
+              </div>
+      
+              <!--日本酒-->
+              <div class="mb-3">
+                <%= sake_field.label :brand, "日本酒名（必須）" %>
+                <%= sake_field.text_field :brand, class: "form-control border border-warning" %>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <%= sake_field.label :specially_designated, "特定名称" %>
+                    <%= sake_field.text_field :specially_designated, placeholder: "例）純米酒、上撰など",
+                                                                     class: "form-control" %>
+                  </div>
+                  <div class="col-6">
+                    <%= sake_field.label :recipe, "製法" %>
+                    <%= sake_field.text_field :recipe, placeholder: "例）無濾過生原酒",
+                                                       class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <%= sake_field.label :nihonshudo, "日本酒度" %>
+                    <%= sake_field.number_field :nihonshudo, placeholder: "例）-1.0",
+                                                             class: "form-control" %>
+                  </div>
+                  <div class="col-6">
+                    <%= sake_field.label :acidity, "製法" %>
+                    <%= sake_field.number_field :acidity, placeholder: "例）1.0",
+                                                          class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <%= sake_field.label :is_confirmed, "管理者確認：" %>
+                <%= sake_field.select :is_confirmed, 
+                  { "確認済み" => true, "未確認" => false } %>
+              </div>
+              <%= sake_field.hidden_field :id %>
+      
+              <%= sake_field.submit "-変更する-", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      
+      <% end %>
+
+
+    </main>
+
+  </div>
+</div>

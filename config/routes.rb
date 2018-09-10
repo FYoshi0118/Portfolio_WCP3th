@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   registrations: 'admins/registrations'
   }
   get 'admins/top' => 'admins#top', as: :admin_top
-  get 'admins/index' => 'admins#index', as: :admins
-  resources :admins, except: [:index, :new, :create]
-  namespace :admins do
+  resources :admins
+  post '/admins/:id' => 'admins#update_status', as: 'update_status_admin'
+  get '/admins/:id/edit_password' => 'admins#edit_password', as: 'edit_password_admin'
+  namespace :admin do
     resources :users, except: [:new, :create] # userの編集と削除
     resources :breweries # Breweryの登録・編集・削除
     resources :sakes # Sakeの登録・編集・削除

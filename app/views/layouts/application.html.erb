@@ -32,24 +32,45 @@
       <%= yield %>
     </div>
 
-    <footer class="bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Portfolio</p>
-      </div>
-    </footer>
-
-    <% if Rails.env.development?%>
-      <div class="debug">
-        <%= debug(response.status) %>
-        <p>response status</p>
-        <%= debug(params) %>
-        <p>params</p>
-        <%= debug(@user.inspect) %>
-        <p>@user</p>
-        <%= debug(current_user.inspect) %>
-        <p>current_user</p>
-      </div>
+    <% unless admin_signed_in? %>
+      <footer class="bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; Portfolio</p>
+        </div>
+      </footer>
     <% end %>
 
+<%
+=begin
+%>
+    <% if Rails.env.development?%>
+      <% if user_signed_in? %>
+        <div class="debug">
+          <%= debug(response.status) %>
+          <p>response status</p>
+          <%= debug(params) %>
+          <p>params</p>
+          <%= debug(@user.inspect) %>
+          <p>@user</p>
+          <%= debug(current_user.inspect) %>
+          <p>current_user</p>
+        </div>
+      <% end %>
+      <% if admin_signed_in? %>
+        <div class="debug">
+          <%= debug(response.status) %>
+          <p>response status</p>
+          <%= debug(params) %>
+          <p>params</p>
+          <%= debug(@admin.inspect) %>
+          <p>@admin</p>
+          <%= debug(current_admin.inspect) %>
+          <p>current_admin</p>
+        </div>
+      <% end %>
+    <% end %>
+<%
+=end
+%>
   </body>
 </html>

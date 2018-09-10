@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <!--サイドバー-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <%= render 'layouts/sidebar/sidebar_admins.html.erb' %>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+				<h2>管理者一覧</h2>
+				<!--検索機能-->
+				<div>
+          <div class="input-group form-inline">
+            <%= search_form_for @search do |f| %>
+              <%= f.text_field :family_name_cont, class: "form-control", placeholder: '検索' %>
+              <span class="input-group-btn">
+                <%= f.button fa_icon("search"), class: 'btn btn-secondary'%>
+              </span>
+            <% end %>
+          </div>
+        </div>
+			</div>
+
+      <!--一覧-->
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th>名前</th>
+							<th>メールアドレス</th>
+							<th>権限</th>
+							<% if current_admin.is_main_administer == true %>
+  							<th></th>
+  							<th></th>
+  						<% end %>
+						</tr>
+					</thead>
+					<tbody>
+					  <% @admins.each do |admin| %>
+  						<tr>
+  							<td><%= "#{admin.family_name} #{admin.given_name}" %></td>
+  							<td><%= admin.email %></td>
+  							<% if admin.is_main_administer == true  %>
+    							<td class="text-danger">メイン管理者</td>
+    						<% elsif admin.is_main_administer == false %>
+    						  <td class="text-success">サブ管理者</td>
+    						<% end %>
+    						<% if current_admin.is_main_administer == true %>
+    						  <td>
+      						  <%= link_to "詳細・編集", edit_admin_path(admin.id), class: "link-item" %>
+      						</td>
+      						<td>
+      						  <% if admin != current_admin && admin.is_deleted == false %>
+                      <%= link_to "アカウント停止", update_status_admin_path(admin),
+                        method: :post, "data-confirm" => "サブ管理者 #{admin.family_name} #{admin.given_name} を停止しますか？",
+                        class: "btn btn-danger float-right btn-sm" %>
+                    <% elsif admin != current_admin && admin.is_deleted == true %>
+                      <%= link_to "アカウント復旧", update_status_admin_path(admin),
+                        method: :post, "data-confirm" => "サブ管理者 #{admin.family_name} #{admin.given_name} のアカウントを復旧しますか？",
+                        class: "btn btn-primary float-right btn-sm" %>
+                    <% end %>
+      						</td>
+    						<% end %>
+  						</tr>
+  					<% end %>
+					</tbody>
+				</table>
+			</div>
+    </main>
+
+  </div>
+</div>

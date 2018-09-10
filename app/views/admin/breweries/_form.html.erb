@@ -1,0 +1,59 @@
+<%= form_for(brewery, url: url) do |f| %>
+  <% if brewery.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= brewery.errors.count %>件のエラーが発生しました
+      </h2>
+      <ul>
+        <% brewery.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="mb-3">
+          <%= f.label :name, "蔵元名（必須）" %>
+          <%= f.text_field :name, placeholder: "○○酒造",
+                                  class: "form-control border border-warning" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :post_code, "郵便番号" %>
+          <%= f.number_field :post_code, placeholder: "例：1234567",
+                                             class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :address, "住所" %>
+          <%= f.text_area :address, placeholder: "全角で入力して下さい",
+                                    rows: "3",
+                                    class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :phone_number, "電話番号" %>
+          <%= f.telephone_field :phone_number, placeholder: "半角数字で入力して下さい（ハイフンなし）",
+                                               class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, placeholder: "半角英数字で入力して下さい",
+                                        class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :url, "蔵元HP" %>
+          <%= f.url_field :url, placeholder: "半角英数字で入力して下さい",
+                                class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :is_confirmed, "管理者確認" %>
+          <%= f.select :is_confirmed, 
+            { "確認済み" => true, "未確認" => false } %>
+        </div>
+        <%= f.submit submit, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  
+<% end %>

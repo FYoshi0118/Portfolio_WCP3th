@@ -1,11 +1,10 @@
-<h4 class="d-flex justify-content-center">
+<h4 class="d-flex justify-content-center mb-3">
   <span class="text-muted">ユーザー情報</span>
 </h4>
 <ul class="list-group mb-3">
   <li class="list-group-item d-flex justify-content-center lh-condensed">
 		<div>
 			<h5 class="text-center"><%= current_user.nickname %></h5>
-			<h5 class="text-center"><%= current_user.name_code %></h5>
 		</div>
 	</li>
 	<li class="list-group-item d-flex justify-content-center lh-condensed">
@@ -22,17 +21,14 @@
 	<li class="list-group-item d-flex justify-content-center lh-condensed">
 		<div>
 			<h6 class="text-center">自己紹介</h6>
-			<p class="text-center" style="word-wrap: break-word;"><%= current_user.introduction %></p>
-		</div>
-	</li>
-	<li class="list-group-item d-flex justify-content-center lh-condensed">
-		<div>
-			<h6 class="text-center">自己紹介</h6>
 			<p class="text-center" style="word-wrap: break-word;">あああああああああああああああああああああああああ</p>
 		</div>
 	</li>
 </ul>
 
+<%
+=begin
+%>
 <table class="table">
   <thead>
     <tr>
@@ -44,10 +40,6 @@
     <tr>
       <th scope="row">名前</th>
       <td><%= current_user.nickname %></td>
-    </tr>
-    <tr>
-      <th scope="row">ID</th>
-      <td><%= current_user.name_code %></td>
     </tr>
     <tr>
       <th scope="row">email</th>
@@ -67,3 +59,6 @@
     </tr>
   </tbody>
 </table>
+<%
+=end
+%>
