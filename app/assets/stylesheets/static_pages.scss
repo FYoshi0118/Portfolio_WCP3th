@@ -1,3 +1,4 @@
+// top
 .jumbotron-extend {
   position: relative;
   height: 100vh;
@@ -21,4 +22,10 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+// about
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
 }
