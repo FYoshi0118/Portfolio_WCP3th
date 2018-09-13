@@ -2,15 +2,17 @@ require 'csv'
 
 csv = CSV.read('db/fixtures/development/brewery.csv')
 csv.each do |line|
-  name = line[0]
-  post_code = line[1]
-  address = line[2]
-  phone_number = line[3]
-  email = line[4]
-  url = line[5]
-  is_confirmed = line[6]
+  id = line[0]
+  name = line[1]
+  post_code = line[2]
+  address = line[3]
+  phone_number = line[4]
+  email = line[5]
+  url = line[6]
+  is_confirmed = line[7]
 
   Brewery.seed do |s|
+    s.id = id
     s.name = name
     s.post_code = post_code
     s.address = address
