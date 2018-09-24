@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <!--サイドバー-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <%= render 'layouts/sidebar/sidebar_admins.html.erb' %>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<h2>投稿詳細</h2>
+				<!--検索機能-->
+			</div>
+
+      <!--一覧-->
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th>投稿者</th>
+							<th>飲んだ日本酒</th>
+							<th>投稿内容</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><%= @post.user.nickname %></td>
+							<td><%= @post.sake.brand %></td>
+							<td><%= @post.content %></td>
+  						<td><%#= link_to "詳細", admin_post_path(post.id), class: "text-info" %></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+    </main>
+
+  </div>
+</div>

@@ -6,9 +6,75 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <!--Header-->
+    <% if admin_signed_in? %>
+      <%= render 'layouts/header/header_admins'  %>
+    <% else %>
+      <%= render 'layouts/header/header_users'  %>
+    <% end %>
+
+    <% if notice %>
+      <div class="container" style="padding-top:4.5rem;">
+        <div class="row">
+          <p class="col-12 notice flash-message text-primary text-center"><%= notice %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="container" style="padding-top:4.5rem;">
+        <div class="row">
+          <p class="col-12 alert flash-message text-danger text-center"><%= alert %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <div>
+      <%= yield %>
+    </div>
+
+    <% unless admin_signed_in? %>
+      <footer class="bg-dark">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; Portfolio</p>
+        </div>
+      </footer>
+    <% end %>
+
+<%
+=begin
+%>
+    <% if Rails.env.development?%>
+      <% if user_signed_in? %>
+        <div class="debug">
+          <%= debug(response.status) %>
+          <p>response status</p>
+          <%= debug(params) %>
+          <p>params</p>
+          <%= debug(@user.inspect) %>
+          <p>@user</p>
+          <%= debug(current_user.inspect) %>
+          <p>current_user</p>
+        </div>
+      <% end %>
+      <% if admin_signed_in? %>
+        <div class="debug">
+          <%= debug(response.status) %>
+          <p>response status</p>
+          <%= debug(params) %>
+          <p>params</p>
+          <%= debug(@admin.inspect) %>
+          <p>@admin</p>
+          <%= debug(current_admin.inspect) %>
+          <p>current_admin</p>
+        </div>
+      <% end %>
+    <% end %>
+<%
+=end
+%>
   </body>
 </html>

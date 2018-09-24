@@ -1,0 +1,36 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top shadow">
+    <div class="container-fluid">
+  
+      <!-- Brand -->
+      <%= link_to admin_top_path, class: "navbar-brand text-white" do %>
+        <%= fa_icon "heart", text: "日本酒" %>
+      <% end %>
+  
+      <!-- Collapse -->
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <%= fa_icon "bars", text: "Menu" %>
+      </button>
+  
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item text-white">
+            <%= "#{current_admin.family_name} #{current_admin.given_name}" %>
+          </li>
+        </ul>
+  
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-outline-warning text-warning' %>
+          </li>
+        </ul>
+  
+      </div>
+  
+    </div>
+  </nav>
+</header>
