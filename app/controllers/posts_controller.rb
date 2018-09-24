@@ -5,8 +5,7 @@ class PostsController < ApplicationController
   before_action :check_login
 
   def index
-    # @posts = Post.where(user_id: current_user.id)
-    @user = User.find(current_user.id)
+    @posts = Post.page(params[:page]).order(:updated_at).reverse_order
   end
 
   def show
