@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :check_login
 
   def index
-    @posts = Post.page(params[:page]).order(:created_at)
+    @posts = Post.page(params[:page]).order(:updated_at).reverse_order
   end
 
   def show
