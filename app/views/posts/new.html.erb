@@ -3,13 +3,9 @@
   <%= render 'layouts/navbar_users.html.erb' %>
 
   <div class="row justify-content-center">
-    <!--サイドバー-->
-    <div class="col-3">
-      <%= render 'layouts/sidebar/sidebar_users.html.erb'  %>
-    </div>
 
     <!--投稿フォーム-->
-    <div class="col-8">
+    <div class="col-5">
       <!--蔵元-->
       <legend>日本酒情報</legend>
       <%= form_for(@brewery, url: posts_path) do |brewery_field|  %>
@@ -77,13 +73,13 @@
             <%= sake_field.fields_for :posts do |post_field| %>
               <div class="row">
                 <div class="col-6" id ="star">
-                  <%= post_field.label :star, "評価（必須）" %><br>
+                  <%= post_field.label :star, "評価（必須）" %>
                   <%= post_field.hidden_field :star, id: :post_star %>
                 </div>
-                <div class="col-6">
-                  <%= post_field.label :image, "画像" %>
-                  <%= post_field.attachment_field :image, class: "form-control" %>
-                </div>
+                <!--<div class="col-6">-->
+                <!--  <%#= post_field.label :image, "画像" %>-->
+                <!--  <%#= post_field.attachment_field :image, class: "form-control" %>-->
+                <!--</div>-->
               </div>
               <div class="mb-3">
                 <%= post_field.label :content, "本文（必須）" %>
