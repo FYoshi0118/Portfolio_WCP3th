@@ -3,7 +3,8 @@ class CreateBreweries < ActiveRecord::Migration[5.1]
     create_table :breweries do |t|
       t.string :name, null: false, index: true
       t.string :post_code, limit: 7
-      t.string :address, index: true
+      t.string :address_prefecture, index: true
+      t.string :address_city, index: true
       t.string :phone_number, index: true, limit: 11
       t.string :email
       t.string :url
