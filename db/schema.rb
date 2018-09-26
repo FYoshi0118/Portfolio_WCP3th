@@ -40,14 +40,16 @@ ActiveRecord::Schema.define(version: 20180711115939) do
   create_table "breweries", force: :cascade do |t|
     t.string "name", null: false
     t.string "post_code", limit: 7
-    t.string "address"
+    t.string "address_prefecture"
+    t.string "address_city"
     t.string "phone_number", limit: 11
     t.string "email"
     t.string "url"
     t.boolean "is_confirmed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_breweries_on_address"
+    t.index ["address_city"], name: "index_breweries_on_address_city"
+    t.index ["address_prefecture"], name: "index_breweries_on_address_prefecture"
     t.index ["is_confirmed"], name: "index_breweries_on_is_confirmed"
     t.index ["name"], name: "index_breweries_on_name"
     t.index ["phone_number"], name: "index_breweries_on_phone_number"
@@ -56,12 +58,11 @@ ActiveRecord::Schema.define(version: 20180711115939) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "sake_id", null: false
-    t.text "content", null: false
+    t.text "content"
     t.text "image_id"
     t.integer "star", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content"], name: "index_posts_on_content"
     t.index ["sake_id"], name: "index_posts_on_sake_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
