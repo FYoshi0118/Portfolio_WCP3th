@@ -10,7 +10,7 @@ class AnalysesController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(current_user.id)
+    @posts = Post.where(user_id: current_user.id)
   end
 
 end
