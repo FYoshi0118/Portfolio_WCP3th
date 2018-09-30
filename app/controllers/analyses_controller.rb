@@ -7,4 +7,6 @@ class AnalysesController < ApplicationController
     @posts = Post.where(user_id: current_user.id)
     @evaluations = Post.joins(sake: :brewery).select('address_prefecture, AVG(star) AS avg_star').group(:address_prefecture).where(user_id: current_user.id)
   end
+
 end
+

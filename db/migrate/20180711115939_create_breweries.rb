@@ -8,7 +8,7 @@ class CreateBreweries < ActiveRecord::Migration[5.1]
       t.string :phone_number, index: true, limit: 11
       t.string :email
       t.string :url
-      t.boolean :is_confirmed, null: false, index: true, default: false # false => 未確認、true => 確認済み
+      t.boolean :is_confirmed, null: false, index: true, default: false 
 
       t.timestamps
     end
