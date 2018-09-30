@@ -46,8 +46,8 @@
         <p class="lead">どんな味の日本酒が好きなのか</p>
         <p class="lead">自分でも知らなかった好みを知って新しい飲酒生活を！</p>
       </div>
-      <div class="col-6 mt-3">
-        <canvas id="aboutChart"></canvas>
+      <div class="col-6 mb-4">
+        <%= image_tag "/images/about-graph.jpg", class: "img-fluid rounded" %>
       </div>
     </div>
   </section>
@@ -113,26 +113,3 @@
   </div>
 
 </div>
-
-<script>
-var ctx = document.getElementById("aboutChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["神奈川県","東京都","群馬県","千葉県","静岡県"],
-        datasets: [{
-            label: "サンプル",
-            data: [1,2,3,4,5],
-            backgroundColor: 'rgba(255, 99, 132, 1.0)',
-            borderColor: 'rgba(255, 50, 132, 1.0)',
-            fill: false
-        }]
-    },
-    options: {
-        title:  {
-          display: true,
-          text: "県別の評価点数"
-        }
-    }
-});
-</script>
