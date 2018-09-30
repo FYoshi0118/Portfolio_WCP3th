@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
 
     <!--投稿フォーム-->
-    <div class="col-5">
+    <div class="col-5 mb-5">
       <!--蔵元-->
       <legend>日本酒情報</legend>
       <%= form_for(@brewery, url: posts_path) do |brewery_field|  %>
@@ -105,10 +105,6 @@
         }
       });
     </script>
-
-    <%= debug(@brewery.inspect) %>
-    <%= debug(@sake.inspect) %>
-    <%= debug(@post.inspect) %>
   </div>
 </div>
 
