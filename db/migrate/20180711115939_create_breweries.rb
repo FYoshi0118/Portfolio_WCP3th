@@ -1,6 +1,6 @@
 class CreateBreweries < ActiveRecord::Migration[5.1]
   def change
-    create_table :breweries, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :breweries do |t|
       t.string :name, null: false, index: true
       t.string :post_code, limit: 7
       t.string :address_prefecture, index: true
