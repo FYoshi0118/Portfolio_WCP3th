@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
 
     <!--投稿フォーム-->
-    <div class="col-5">
+    <div class="col-5 mb-5">
       <!--蔵元-->
       <legend>日本酒情報</legend>
       <%= form_for(@brewery, url: posts_path) do |brewery_field|  %>
@@ -72,9 +72,14 @@
             <% end %>
             <%= sake_field.fields_for :posts do |post_field| %>
               <div class="row">
-                <div class="col-6" id ="star">
-                  <%= post_field.label :star, "評価（必須）" %>
-                  <%= post_field.hidden_field :star, id: :post_star %>
+                <div class="col-12" id ="star">
+                  <%= post_field.label :star, "評価（必須）：" %>
+                    <label><%= post_field.radio_button :star, 0, class: "rd mr-1" %>０　</label>
+                    <label><%= post_field.radio_button :star, 1, class: "rd mr-1" %>１　</label>
+                    <label><%= post_field.radio_button :star, 2, class: "rd mr-1" %>２　</label>
+                    <label><%= post_field.radio_button :star, 3, class: "rd mr-1" %>３　</label>
+                    <label><%= post_field.radio_button :star, 4, class: "rd mr-1" %>４　</label>
+                    <label><%= post_field.radio_button :star, 5, class: "rd mr-1" %>５</label>
                 </div>
                 <!--<div class="col-6">-->
                 <!--  <%#= post_field.label :image, "画像" %>-->
@@ -82,9 +87,9 @@
                 <!--</div>-->
               </div>
               <div class="mb-3">
-                <%= post_field.label :content, "本文（必須）" %>
+                <%= post_field.label :content, "本文" %>
                 <%= post_field.text_area :content, rows: "5",
-                                                   class: "form-control border border-warning" %>
+                                                   class: "form-control" %>
               </div>
               <%= post_field.hidden_field :user_id, value: current_user.id %>
               <%= post_field.hidden_field :id %>
@@ -96,19 +101,9 @@
         <%= brewery_field.submit "-投稿する-", class: "btn btn-primary btn-block" %>
       <% end %>
     </div>
-
-    <script>
-      $('#star').raty({
-        path: '/assets/',
-        click: function(score, e) {
-          $("#post_star").val(score)
-        }
-      });
-    </script>
-
-    <%= debug(@brewery.inspect) %>
-    <%= debug(@sake.inspect) %>
-    <%= debug(@post.inspect) %>
+    <%#= debug(@brewery.inspect) %>
+    <%#= debug(@sake.inspect) %>
+    <%#= debug(@post.inspect) %>
   </div>
 </div>
 
