@@ -38,7 +38,7 @@ module AnalysesHelper
     # ハッシュを降順に並べ替える
     @address_count = Hash[@address_count.sort_by{ |_, v| -v }]
 
-    return @address_count.values.take(takes_number) << 0
+    return @address_count.values.take(takes_number)
   end
 
   # chart-2用 県別の星評価数
@@ -71,8 +71,9 @@ module AnalysesHelper
     hash_evaluation = Hash[*arr_evaluation]
 
     # ハッシュを降順に並べ替える
-    @evaluation_sort = Hash[hash_evaluation.sort_by{ |_, v| -v }]
+    evaluation_sort = Hash[hash_evaluation.sort_by{ |_, v| -v }]
+    @evaluation_string = evaluation_sort.values.take(takes_number).join(',').split(',')
 
-    return @evaluation_sort.values.take(takes_number) << 0
+    return @evaluation_string
   end
 end
