@@ -3,21 +3,24 @@
   <%= render 'layouts/navbar_users.html.erb' %>
 
   <div class="row">
-
-    <div class="col-6 mb-5">
-      <div class="card">
-        <div class="card-body">
-          <canvas id="chart-1"></canvas>
+    <% if @posts.empty? %>
+      <div class="col-12 text-danger text-center">投稿がないため表示できません。</div>
+    <% else %>
+      <div class="col-6 mb-5">
+        <div class="card">
+          <div class="card-body">
+            <canvas id="chart-1"></canvas>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <canvas id="chart-2"></canvas>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <canvas id="chart-2"></canvas>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
